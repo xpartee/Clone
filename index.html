@@ -1,249 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniel Carpenter's Data</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Carpenter's Data</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      background-color: #000000;
-      color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px 16px;
-    }
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+        }
 
-    .app-container {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
 
-    /* Top Navigation Icons */
-    .header-actions {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 40px;
-      padding-right: 4px;
-    }
+        /* ========== INITIAL VIEW ========== */
+        .initial-view {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .header-icon {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: #ffffff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      cursor: pointer;
-      opacity: 0.9;
-    }
+        .header-actions {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 40px;
+            padding-right: 4px;
+        }
 
-    /* Main Title */
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 40px;
-      letter-spacing: -0.5px;
-    }
+        .header-icon {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            cursor: pointer;
+            opacity: 0.9;
+        }
 
-    /* Options Stack */
-    .options-grid {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+        }
 
-    .option-card {
-      background-color: #232328;
-      border-radius: 28px;
-      padding: 48px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      text-decoration: none;
-      color: #ffffff;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-      cursor: pointer;
-    }
+        .options-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
 
-    .option-card:hover {
-      background-color: #2c2c32;
-    }
+        .option-card {
+            background-color: #232328;
+            border-radius: 28px;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            cursor: pointer;
+        }
 
-    .option-card:active {
-      transform: scale(0.98);
-    }
+        .option-card:hover {
+            background-color: #2c2c32;
+        }
 
-    /* Blue Icon Badge */
-    .icon-badge {
-      width: 46px;
-      height: 46px;
-      background-color: #558ee6;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .option-card:active {
+            transform: scale(0.98);
+        }
 
-    .icon-badge svg {
-      width: 24px;
-      height: 24px;
-      fill: #ffffff;
-    }
+        .icon-badge {
+            width: 46px;
+            height: 46px;
+            background-color: #558ee6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
 
-    .card-label {
-      font-size: 18px;
-      font-weight: 700;
-      text-align: center;
-    }
+        .icon-badge svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
 
-    /* Green Clone Button */
-    .clone-btn {
-      width: 100%;
-      margin-top: 24px;
-      background-color: #22c55e;
-      color: #ffffff;
-      border: none;
-      border-radius: 16px;
-      padding: 16px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-    }
+        .card-label {
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+        }
 
-    .clone-btn:hover {
-      background-color: #16a34a;
-    }
+        .card-subtext {
+            font-size: 14px;
+            color: #a1a1aa;
+            font-weight: 400;
+            text-align: center;
+        }
 
-    .clone-btn:active {
-      transform: scale(0.98);
-    }
-  </style>
+        .data-list {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px 5px;
+            border-bottom: 1px solid #333338;
+        }
+
+        .data-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a1a1aa;
+            font-size: 28px;
+        }
+
+        .data-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: #a1a1aa;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .data-item h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Green Button */
+        .clone-btn {
+            width: 100%;
+            margin-top: 24px;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .clone-btn:hover {
+            background-color: #16a34a;
+        }
+
+        .clone-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ========== GIFT CARD VIEW ========== */
+        .giftcard-view {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .giftcard-image-area {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .giftcard-image {
+            width: 180px;
+            height: auto;
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .giftcard-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .giftcard-card {
+            background-color: #232328;
+            border-radius: 28px;
+            padding: 32px 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .giftcard-title {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #d1d1d6;
+            margin-left: 4px;
+        }
+
+        .upload-area {
+            background-color: #1c1c1e;
+            border: 2px dashed #3a3a3c;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #a1a1aa;
+        }
+
+        .upload-area:hover {
+            border-color: #22c55e;
+            background-color: #2c2c2e;
+        }
+
+        .upload-area.has-file {
+            border-color: #22c55e;
+            border-style: solid;
+            background-color: #1a2e1e;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #d1d1d6;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-top: 4px;
+        }
+
+        .file-name {
+            font-size: 13px;
+            color: #22c55e;
+            font-weight: 600;
+            margin-top: 8px;
+            display: none;
+            word-break: break-all;
+        }
+
+        .upload-area.has-file .file-name {
+            display: block;
+        }
+
+        .upload-area.has-file .upload-text {
+            color: #22c55e;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            background-color: #1c1c1e;
+            border: 1px solid #3a3a3c;
+            border-radius: 12px;
+            color: #ffffff;
+            outline: none;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            transition: border 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #22c55e;
+        }
+
+        .back-link {
+            color: #8e8e93;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* ========== ERROR POPUP ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 24px;
+        }
+
+        .modal-dialog {
+            background-color: #232328;
+            border-radius: 28px;
+            padding: 32px 24px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .modal-dialog h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .modal-dialog p {
+            font-size: 14px;
+            color: #a1a1aa;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .modal-close-btn {
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #16a34a;
+        }
+
+        #fileInput {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="app-container">
+        <!-- ==================== INITIAL VIEW ==================== -->
+        <div class="initial-view" id="initialView">
+            <div class="header-actions">
+                <svg class="header-icon" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                <svg class="header-icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M10 2v4"/><path d="M14 2v4"/></svg>
+                <svg class="header-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5" fill="#ffffff"/><circle cx="12" cy="5" r="1.5" fill="#ffffff"/><circle cx="12" cy="19" r="1.5" fill="#ffffff"/></svg>
+            </div>
 
-  <div class="app-container">
-    <!-- Top Action Bar -->
-    <div class="header-actions">
-      <!-- Cloud Icon -->
-      <svg class="header-icon" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-      <!-- Memory Card Icon -->
-      <svg class="header-icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M10 2v4"/><path d="M14 2v4"/></svg>
-      <!-- Menu Dots Icon -->
-      <svg class="header-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5" fill="#ffffff"/><circle cx="12" cy="5" r="1.5" fill="#ffffff"/><circle cx="12" cy="19" r="1.5" fill="#ffffff"/></svg>
-    </div>
+            <h1>Daniel Carpenter's Data</h1>
 
-    <!-- Page Title -->
-    <h1>Daniel Carpenter's Data</h1>
+            <div class="options-grid">
+                <a href="#" class="option-card">
+                    <div class="icon-badge">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h6v-2H5V5z"/>
+                        </svg>
+                    </div>
+                    <span class="card-label">Clone from this device</span>
+                    <span class="card-subtext">IMEI: 352703943015910</span>
+                </a>
 
-    <!-- Transfer Cards -->
-    <div class="options-grid">
-      <a href="#" class="option-card">
-        <div class="icon-badge">
-          <!-- Send/Clone Out Icon -->
-          <svg viewBox="0 0 24 24">
-            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h6v-2H5V5z"/>
-          </svg>
+                <a href="#" class="option-card">
+                    <div class="icon-badge">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 5h-6V3h6c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2h-6v-2h6V5zm-7 12l1.41-1.41L10.83 13H21v-2H10.83l2.58-2.58L12 7l-5 5 5 5z"/>
+                        </svg>
+                    </div>
+                    <span class="card-label">Clone on this device</span>
+                    <span class="card-subtext">IMEI: 557278992656998</span>
+                </a>
+            </div>
+
+            <div class="data-list">
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 5.18 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L9 10.73a16 16 0 0 0 4.27 4.27l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg></span><h3>Call logs</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h3>Contacts</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><h3>Location</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span><h3>Notifications</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></span><h3>Phone</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span><h3>Photos and videos</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span><h3>SMS</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span><h3>Instagram</h3></div>
+                <div class="data-item"><span class="data-icon">👻</span><h3>Snapchat</h3></div>
+                <div class="data-item"><span class="data-icon">f</span><h3>Facebook</h3></div>
+                <div class="data-item"><span class="data-icon"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span><h3>iMessage</h3></div>
+            </div>
+
+            <button class="clone-btn" id="proceedToGiftCardBtn">Click here to proceed</button>
         </div>
-        <span class="card-label">Clone from this phone</span>
-      </a>
 
-      <a href="#" class="option-card">
-        <div class="icon-badge">
-          <!-- Receive/Clone In Icon -->
-          <svg viewBox="0 0 24 24">
-            <path d="M19 5h-6V3h6c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2h-6v-2h6V5zm-7 12l1.41-1.41L10.83 13H21v-2H10.83l2.58-2.58L12 7l-5 5 5 5z"/>
-          </svg>
+        <!-- ==================== GIFT CARD VIEW ==================== -->
+        <div class="giftcard-view" id="giftcardView">
+            <!-- Gift card image and value -->
+            <div class="giftcard-image-area">
+                <img src="giftcard.jpg" alt="Gift Card" class="giftcard-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="giftcard-value">$500 Apple giftcard</div>
+            </div>
+
+            <div class="giftcard-card">
+                <div class="giftcard-title">🎁 Insert Gift Card to Continue</div>
+
+                <div class="form-group">
+                    <label>Upload Gift Card Picture</label>
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <span class="upload-icon">📷</span>
+                        <span class="upload-text">Tap to upload or drag & drop</span>
+                        <span class="upload-hint">PNG, JPG, JPEG • Max 5MB</span>
+                        <span class="file-name" id="fileNameDisplay"></span>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" onchange="handleFileSelect(event)">
+                </div>
+
+                <div class="form-group">
+                    <label>Gift Card Number</label>
+                    <input type="text" id="giftCardNumber" class="input-field" placeholder="1234-5678-9012-3456" maxlength="19" oninput="formatCardNumber(this)">
+                </div>
+
+                <div class="form-group">
+                    <label>Security PIN (optional)</label>
+                    <input type="password" id="giftCardPin" class="input-field" placeholder="••••" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+
+                <div class="form-group">
+                    <label>Expiry Date (if any)</label>
+                    <input type="text" id="expiryDate" class="input-field" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+                </div>
+
+                <button class="clone-btn" id="giftcardProceedBtn">Proceed</button>
+                <span class="back-link" id="backToInitialLink">← Back to data</span>
+            </div>
         </div>
-        <span class="card-label">Clone on this phone</span>
-      </a>
     </div>
-<!-- Data List -->
-<div class="options-grid">
 
-  <div class="option-card">
-    <div class="icon-badge">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.2 1.1.6 1.6 1.1.5.5.9 1 1.1 1.6.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.2.6-.6 1.1-1.1 1.6-.5.5-1 .9-1.6 1.1-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.2-1.1-.6-1.6-1.1-.5-.5-.9-1-1.1-1.6-.2-.5-.4-1.2-.5-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.2-.6.6-1.1 1.1-1.6.5-.5 1-.9 1.6-1.1.5-.2 1.2-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2z"/>
-      </svg>
+    <!-- ==================== ERROR POPUP ==================== -->
+    <div class="modal-overlay" id="errorModal">
+        <div class="modal-dialog">
+            <div class="modal-icon">⚠️</div>
+            <h3>Error</h3>
+            <p>Oops! Something went wrong while processing your gift card. Please double‑check your details and try again.</p>
+            <button class="modal-close-btn" id="closeErrorBtn">Dismiss</button>
+        </div>
     </div>
-    <span class="card-label">Instagram</span>
-  </div>
 
-  <div class="option-card">
-    <div class="icon-badge">👻</div>
-    <span class="card-label">Snapchat</span>
-  </div>
+    <script>
+        const initialView = document.getElementById('initialView');
+        const giftcardView = document.getElementById('giftcardView');
+        const proceedToGiftCardBtn = document.getElementById('proceedToGiftCardBtn');
+        const backToInitialLink = document.getElementById('backToInitialLink');
+        const giftcardProceedBtn = document.getElementById('giftcardProceedBtn');
+        const errorModal = document.getElementById('errorModal');
+        const closeErrorBtn = document.getElementById('closeErrorBtn');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
 
-  <div class="option-card">
-    <div class="icon-badge">f</div>
-    <span class="card-label">Facebook</span>
-  </div>
+        // Switch views
+        proceedToGiftCardBtn.addEventListener('click', () => {
+            initialView.style.display = 'none';
+            giftcardView.style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-  <div class="option-card">
-    <div class="icon-badge">💬</div>
-    <span class="card-label">iMessage</span>
-  </div>
+        backToInitialLink.addEventListener('click', () => {
+            giftcardView.style.display = 'none';
+            initialView.style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-  <div class="option-card">
-    <div class="icon-badge">📞</div>
-    <span class="card-label">Call logs</span>
-  </div>
+        // File upload
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please select a valid image (PNG, JPG, or JPEG).');
+                fileInput.value = '';
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size exceeds 5MB. Choose a smaller image.');
+                fileInput.value = '';
+                return;
+            }
+            fileNameDisplay.textContent = '✅ ' + file.name;
+            uploadArea.classList.add('has-file');
+        }
 
-  <div class="option-card">
-    <div class="icon-badge">👤</div>
-    <span class="card-label">Contacts</span>
-  </div>
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.add('drag-over');
+        });
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.remove('drag-over');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please drop an image file.');
+                    return;
+                }
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File too large (max 5MB).');
+                    return;
+                }
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                fileInput.files = dt.files;
+                handleFileSelect({ target: { files: [file] } });
+            }
+        });
 
-  <div class="option-card">
-    <div class="icon-badge">📍</div>
-    <span class="card-label">Location</span>
-  </div>
+        // Input formatting
+        function formatCardNumber(input) {
+            let val = input.value.replace(/[^0-9]/g, '');
+            let formatted = '';
+            for (let i = 0; i < val.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += '-';
+                formatted += val[i];
+            }
+            input.value = formatted;
+        }
 
-  <div class="option-card">
-    <div class="icon-badge">🔔</div>
-    <span class="card-label">Notifications</span>
-  </div>
+        function formatExpiry(input) {
+            let val = input.value.replace(/[^0-9]/g, '');
+            if (val.length >= 3) {
+                val = val.slice(0, 2) + '/' + val.slice(2, 4);
+            }
+            input.value = val;
+        }
 
-  <div class="option-card">
-    <div class="icon-badge">📱</div>
-    <span class="card-label">Phone</span>
-  </div>
+        // Error popup
+        giftcardProceedBtn.addEventListener('click', () => {
+            errorModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
 
-  <div class="option-card">
-    <div class="icon-badge">🖼️</div>
-    <span class="card-label">Photos and videos</span>
-  </div>
+        function closeModal() {
+            errorModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
 
-  <div class="option-card">
-    <div class="icon-badge">💬</div>
-    <span class="card-label">SMS</span>
-  </div>
+        closeErrorBtn.addEventListener('click', closeModal);
+        errorModal.addEventListener('click', (e) => {
+            if (e.target === errorModal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && errorModal.style.display === 'flex') {
+                closeModal();
+            }
+        });
 
-</div>
-    <!-- Green Clone Button -->
-    <button class="clone-btn">Clone</button>
-  </div>
-
+        // Initial state
+        giftcardView.style.display = 'none';
+    </script>
 </body>
 </html>
