@@ -115,6 +115,29 @@
       font-weight: 700;
       text-align: center;
     }
+
+    /* Green Clone Button */
+    .clone-btn {
+      width: 100%;
+      margin-top: 24px;
+      background-color: #22c55e;
+      color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .clone-btn:hover {
+      background-color: #16a34a;
+    }
+
+    .clone-btn:active {
+      transform: scale(0.98);
+    }
   </style>
 </head>
 <body>
@@ -131,7 +154,7 @@
     </div>
 
     <!-- Page Title -->
-    <h1>Transfer your data</h1>
+    <h1>Daniel Carpenter's Data</h1>
 
     <!-- Transfer Cards -->
     <div class="options-grid">
@@ -155,6 +178,9 @@
         <span class="card-label">Clone on this phone</span>
       </a>
     </div>
+
+    <!-- Green Clone Button -->
+    <button class="clone-btn">Clone</button>
   </div>
 
 </body>
